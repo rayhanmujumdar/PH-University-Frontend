@@ -1,13 +1,24 @@
 import AdminDashboard from "../pages/admin/AdminDashboard";
-import CreateAdmin from "../pages/admin/CreateAdmin";
-import CreateFaculty from "../pages/admin/CreateFaculty";
-import CreateStudent from "../pages/admin/CreateStudent";
+import CreateAdmin from "../pages/admin/UserManagement/CreateAdmin";
+import CreateFaculty from "../pages/admin/UserManagement/CreateFaculty";
+import CreateStudent from "../pages/admin/UserManagement/CreateStudent";
+import AcademicSemester from "../pages/admin/academicSemester/AcademicSemester";
 
 export const adminPaths = [
     {
         name: "Dashboard",
         path: "dashboard",
         element: <AdminDashboard />,
+    },
+    {
+        name: "Academic Semester",
+        children: [
+            {
+                name: "Academic semester",
+                path: "academic-semester",
+                element: <AcademicSemester />,
+            },
+        ],
     },
     {
         name: "User Management",
@@ -81,7 +92,6 @@ export const adminPaths = [
 //         },
 //     ]
 // );
-
 
 //! imperative way to items object create
 // const items: MenuProps["items"] = [

@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export type TUser = {
+    userId: string;
+    role: string;
+    iat: number;
+    exp: number;
+};
+
 type TUserState = {
-    user: null | object;
+    user: null | TUser;
     token: null | string;
 };
 
@@ -25,6 +32,5 @@ const authSlice = createSlice({
     },
 });
 
-
-export default authSlice.reducer
-export const {logout, setUser} = authSlice.actions
+export default authSlice.reducer;
+export const { logout, setUser } = authSlice.actions;
