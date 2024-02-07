@@ -1,20 +1,17 @@
-import { Button } from "antd";
-import { FieldValues, useForm } from "react-hook-form";
+import { Button, Row, Typography } from "antd";
+import { FieldValues } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import PHForm from "../components/form/PHForm";
+import PHInput from "../components/form/PHInput";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { TUser, setUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch } from "../redux/hooks";
 import { verifyToken } from "../utils/verifyToken";
+const { Title } = Typography
 
 export default function Login() {
     const location = useLocation();
-    const { register, handleSubmit } = useForm({
-        defaultValues: {
-            userId: "A-0001",
-            password: "123123",
-        },
-    });
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [login] = useLoginMutation();
@@ -33,8 +30,7 @@ export default function Login() {
                     duration: 2000,
                     className: "!text-green-500",
                 });
-                const decoded =
-                    verifyToken(token) as TUser;
+                const decoded = verifyToken(token) as TUser;
                 dispatch(setUser({ user: decoded, token }));
                 const redirect = location.state
                     ? location.state.pathname
@@ -50,31 +46,16 @@ export default function Login() {
         }
     };
     return (
-        <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex h-screen justify-center items-center flex-col space-y-5"
-        >
-            <div>
-                <label htmlFor="id">ID: </label>
-                <input
-                    {...register("userId")}
-                    className="border px-2 py-3"
-                    type="text"
-                    id="id"
-                    placeholder="ID"
-                />
-            </div>
-            <div>
-                <label htmlFor="id">Password: </label>
-                <input
-                    {...register("password")}
-                    className="border px-2 py-3"
-                    type="text"
-                    id="id"
-                    placeholder="password"
-                />
-            </div>
-            <Button htmlType="submit">Submit</Button>
-        </form>
+        <Row justify="center" align="middle" className=" h-screen">
+            <PHForm
+                onSubmit={onSubmit}
+                className="flex justify-center items-center flex-col space-y-5 w-96 border p-5 shadow-md rounded-md"
+            >
+                <Title level={2} style={{ textTransform: 'uppercase' }}>Login</Title>
+                <PHInput name="userId" label="ID" type="text" />
+                <PHInput name="password" label="Password" type="text" />
+                <Button htmlType="submit">Submit</Button>
+            </PHForm>
+        </Row>
     );
 }

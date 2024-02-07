@@ -11,11 +11,12 @@ export default function MainLayout() {
     return (
         <Layout className="h-full min-h-screen">
             <Sidebar />
-            <Header>
-                <Button className="bg-white" onClick={() => dispatch(logout())}>Logout</Button>
-            </Header>
             <Layout>
-                <Header style={{ padding: 0 }} />
+                <Header style={{ padding: 0 }}>
+                    <div className="min-w-full flex justify-end items-center h-0 min-h-full px-5">
+                        <Button className="bg-white" onClick={() => dispatch(logout())}>Logout</Button>
+                    </div>
+                </Header>
                 <Content style={{ margin: "24px 16px 0" }}>
                     <div
                         style={{
